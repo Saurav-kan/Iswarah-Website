@@ -9,3 +9,4 @@ from .serializers import ProductSerializer
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('-created_at')
     serializer_class = ProductSerializer
+    lookup_field = 'slug'
