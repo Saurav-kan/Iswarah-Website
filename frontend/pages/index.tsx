@@ -1,17 +1,28 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-import { useEffect, useState } from "react";
-import { GetStaticProps } from "next";
+// pages/index.tsx
+import { NextPage } from 'next';
+import { useSession, signOut } from 'next-auth/react';
 
-export default function Home() {
-  // const getProudcts = async () => {
-  //   const res = await fetch("http://localhost:3000/api/products");
-  // }
+const Home: NextPage = () => {
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') return <p>Loading…</p>;
+
   return (
-    <>
-      <h1 className="p-8">Home List:</h1>
-      <p>This is the Home page</p>
-    </>
-  );
-}
+    <div className="p-8">
+      <h1>Home List</h1>
 
+      {session ? (
+        <>
+          <p>🎉 You are logged in as <strong>{session.user?.name}</strong>!</p>
+          <button onClick={() => signOut({ callbackUrl: '/login' })}>
+            Sign out
+          </button>
+        </>
+      ) : (
+        <p>😢 You are <strong>not</strong> logged in.</p>
+      )}
+    </div>
+  );
+};
+
+export default Home;
