@@ -1,6 +1,8 @@
-import Home from "./items";
+import Home from "../components/shop/shopGallery";
+import Filter from "../components/shop/filter";
+
 import { GetStaticProps } from "next";
-import { Product } from "./items";
+import { Product } from "../components/shop/shopGallery";
 
 interface ShopProps {
   products: Product[];
@@ -9,9 +11,12 @@ interface ShopProps {
 export default function Shop({ products }: ShopProps) {
   return (
     <>
-    <div className ="w-4/5 ml-auto p-8 align-left">
-      <Home products={products} />
-    </div>
+      <div className="w-1/5 h-screen fixed left-0 bg-gray-100 p-4">
+        <Filter />
+      </div>
+      <div className="w-4/5 ml-auto p-8 align-left">
+        <Home products={products} />
+      </div>
     </>
   );
 }

@@ -2,7 +2,7 @@
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css'; // if you have global styles
-import Navbar from './sharedComponent/navagation'; // if you have a navigation component
+import Navbar from './components/navagation'; // if you have a navigation component
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
