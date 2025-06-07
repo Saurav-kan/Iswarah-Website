@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Product } from "./index"; // Adjust the import path as needed
+import { Product } from "./items"; // Adjust the import path as needed
 import Link from "next/link";
+import Image from 'next/image';
 
 type ProductPageProps = {
   product: Product; // Product details or null if not found
@@ -17,9 +18,11 @@ export default function ProductPage({ product }: ProductPageProps) {
       <p>Price: ${product.price}</p>
       <p>In Stock: {product.in_stock ? "Yes" : "No"}</p>
       {product.image && (
-        <img
-          src={product.image}
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.image}`}
           alt={product.name}
+          width={256}
+          height={256}
           className="w-64 h-64 object-cover"
         />
       )}
