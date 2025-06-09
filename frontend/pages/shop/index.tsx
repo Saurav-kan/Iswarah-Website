@@ -1,7 +1,7 @@
+import { GetStaticProps } from "next";
 import Home from "../components/shop/shopGallery";
 import Filter from "../components/shop/filter";
-
-import { GetStaticProps } from "next";
+import { getProducts } from "../api/backendAPI"; 
 import { Product } from "../components/shop/shopGallery";
 
 interface ShopProps {
@@ -22,12 +22,21 @@ export default function Shop({ products }: ShopProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/`);
-  const products = await res.json();
-  return {
-    props: {
-      products,
-    },
-    revalidate: 60, // Revalidate every 60 seconds
-  };
+  try {
+    const products: Product[] = await getProducts();
+    return {
+      props: {
+        products,
+      },
+      revalidate: 60, // revalidate every 60 seconds
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: {
+        products: [],
+      },
+      revalidate: 60,
+    };
+  }
 };

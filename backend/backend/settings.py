@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_simplejwt',  # JWT authentication for REST framework
     'corsheaders',  # CORS headers for cross-origin requests
+    'django_filters',
 
     'core',  # Custom app for core functionality
     'products',  # Custom app for product management
@@ -147,4 +148,7 @@ REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework_simplejwt.authentication.JWTAuthentication',
   ),
+   'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }

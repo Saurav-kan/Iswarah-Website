@@ -9,6 +9,7 @@ class Product(models.Model):
     in_stock = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='products/', null=True, blank=True, default= 'products/backend/products/DefaultPic.jpg')
+    category = models.ForeignKey("Category", related_name="products", on_delete=models.SET_NULL, null=True,)
 
     def __str__(self):
         return self.name
@@ -27,3 +28,16 @@ class Product(models.Model):
             self.slug = slug
 
         super().save(*args, **kwargs)
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
