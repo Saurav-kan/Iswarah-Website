@@ -1,3 +1,5 @@
+import router from "next/router";
+
 // Base URL from your environment variables
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

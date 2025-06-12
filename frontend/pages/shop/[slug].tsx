@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Product } from "../components/shop/shopGallery"; // Adjust the import path as needed
+import { Product } from "../components/shopComponents/shopGallery"; // Adjust the import path as needed
 import Link from "next/link";
 import Image from "next/image";
 
